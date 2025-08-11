@@ -1,0 +1,134 @@
+'use client';
+import { Input } from "@/components/ui/input";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
+import { Card, CardContent } from "@/components/ui/card";
+import { ChevronRight } from "lucide-react";
+import { AdCarousel } from "@/components/AdCarousel";
+import { useState } from "react";
+import { MapPin, Search } from "lucide-react";
+// Dummy location data (simulate map services API)
+const locations = [
+    { value: "new-york", label: "New York" },
+    { value: "london", label: "London" },
+    { value: "tokyo", label: "Tokyo" },
+    { value: "paris", label: "Paris" },
+    { value: "sydney", label: "Sydney" },
+];
+
+// Dummy category data for left cards
+const categories = [
+    { title: "Category 1", image: "https://images.unsplash.com/photo-1754772512355-299e9c2b1b76?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw2fHx8ZW58MHx8fHx8" },
+    { title: "Category 2", image: "https://images.unsplash.com/photo-1754799399805-da0178249638?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxNXx8fGVufDB8fHx8fA%3D%3D" },
+    { title: "Category 3", image: "https://plus.unsplash.com/premium_photo-1754728140366-a4a8c8cfb266?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzN3x8fGVufDB8fHx8fA%3D%3D" },
+];
+
+export function HeroSection() {
+    const [selectedLocation, setSelectedLocation] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
+
+    // Filter locations based on search term
+    const filteredLocations = locations.filter((loc) =>
+        loc.label.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    return (
+        <section className="py-8 bg-background">
+            <div className="container mx-auto px-4">
+                {/* First main component: Hero text only */}
+                <div className="mb-4">
+                    <h1 className="text-3xl md:text-4xl text-center mb-5 font-bold text-foreground">
+                        Discover Amazing Places
+                    </h1>
+                </div>
+
+                {/* Second main component: Row with two text fields */}
+       <div className="mb-8 mx-auto flex flex-row justify-center items-center gap-2 sm:gap-x-2 w-full sm:w-3/4">
+      <div className="w-full sm:w-1/3">
+        <Popover>
+          <PopoverTrigger asChild>
+            <div className="relative">
+              <MapPin className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+              <Input
+                placeholder="Select location..."
+                value={selectedLocation}
+                className="w-full h-10 py-1 pl-8 text-sm"
+                readOnly
+                size={4}
+              />
+            </div>
+          </PopoverTrigger>
+          <PopoverContent className="w-[250px] p-0">
+            <div className="p-2">
+              <div className="relative mb-2">
+                <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Search locations..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-8 pr-2 py-1 text-sm"
+                />
+              </div>
+              <div className="max-h-40 overflow-y-auto">
+                {filteredLocations.map((loc) => (
+                  <div
+                    key={loc.value}
+                    className="px-2 py-1 hover:bg-accent cursor-pointer"
+                    onClick={() => {
+                      setSelectedLocation(loc.label);
+                      setSearchTerm("");
+                    }}
+                  >
+                    {loc.label}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </PopoverContent>
+        </Popover>
+      </div>
+      <div className="w-full sm:w-2/3">
+        <Input
+          placeholder="Search for place name..."
+          className="w-full h-10 py-3 text-lg"
+        />
+      </div>
+    </div>
+
+                {/* Third main component: Row with left (3 cards in row) and right (carousel ad) */}
+          {/* Third main component: Row with left (3 cards in row) and right (carousel ad) */}
+    {/* Third main component: Row with left (3 cards in row) and right (carousel ad) */}
+        <div className="flex flex-col lg:flex-row gap-6 h-48 lg:h-64">
+          {/* Left section: 60% width, 3 cards in row */}
+          <div className="w-full lg:w-3/5 h-full">
+            <div className="flex gap-6 overflow-x-hidden h-full">
+              {categories.map((category, index) => (
+                <Card
+                  key={index}
+                  className="relative overflow-hidden flex-1 h-full cursor-pointer hover:shadow-lg transition-shadow"
+                  style={{ backgroundImage: `url(${category.image})`, backgroundSize: "cover", backgroundPosition: "center" }}
+                >
+                  {/* Transparent gradient overlay darker at bottom */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <h3 className="absolute bottom-3 left-3 text-l font-semibold text-white z-10">
+                    {category.title}
+                  </h3>
+                  <ChevronRight className="absolute bottom-3 right-3 text-white h-8 w-8 z-10" />
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* Right section: 40% width, single card with carousel ad */}
+          <div className="w-full lg:w-2/5 h-full">
+            <Card className="py-0 overflow-hidden h-full">
+              <AdCarousel />
+            </Card>
+          </div>
+        </div>
+      </div>
+    </section>
+    );
+}
