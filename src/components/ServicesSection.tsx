@@ -1,6 +1,9 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
+    import Image from 'next/image';
+
+// Inside the map div
 
 const services = [
   {
@@ -19,8 +22,36 @@ const services = [
     image: "https://images.unsplash.com/photo-1754772512355-299e9c2b1b76?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw2fHx8ZW58MHx8fHx8",
   },
 ];
+function getStaticMapUrl(options:any) {
+  const apiKey = 'sam_sam_FSUP9N1D50qTgg1mMUODH61sRHKhE8jg';
+  const baseUrl = 'https://api.ambalaymaps.com/v1/staticmap';
 
+  // Default options
+  const defaultOptions = {
+    center: '9.03,38.74', // Addis Ababa coordinates
+    zoom: 12,
+    size: '600x400',
+    maptype: 'roadmap',
+  };
+
+  // Merge options
+  const mergedOptions = { ...defaultOptions, ...options, key: apiKey };
+
+  // Build query string
+  const queryParams = Object.entries(mergedOptions)
+    .map(([key, value]:any) => `${key}=${encodeURIComponent(value)}`)
+    .join('&');
+
+  return `${baseUrl}?${queryParams}`;
+}
 export function ServicesSection() {
+    const mapUrl = getStaticMapUrl({
+    size: '600x400',
+    zoom: 14,
+    markers: 'color:red|label:A|9.03,38.74',
+    path: 'color:0x0000ff|weight:5|9.03,38.74|9.04,38.75|9.05,38.76',
+  });
+  console.log("Map URL:", mapUrl);
   return (
     <section>
       <h2 className="text-2xl font-bold mb-6">Services around you</h2>
@@ -58,9 +89,9 @@ export function ServicesSection() {
     </Card>
   ))}
 </div>
-        <div className="h-96 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg flex items-center justify-center text-muted-foreground">
-          {/* Placeholder for map */}
-          Map Viewhhh
+        <div className="h-96 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden flex items-center justify-center text-muted-foreground">
+
+<Image src={"https://api.ambalaymaps.com/v1/staticmap?center=9.03,38.74&zoom=12&size=600x400&markers=color:red|9.03,38.74&key=sam_sam_FSUP9N1D50qTgg1mMUODH61sRHKhE8jg"}alt="Map of Addis Ababa with marker"  width={600} height={400} className="object-cover" />
         </div>
       </div>
     </section>
