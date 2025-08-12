@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
     import Image from 'next/image';
+import { MapView } from "./MapView";
 
 // Inside the map div
 
@@ -10,6 +11,8 @@ const services = [
     title: "Service 1",
     description: "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever since the 1500s.",
     image: "https://plus.unsplash.com/premium_photo-1754728140366-a4a8c8cfb266?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzN3x8fGVufDB8fHx8fA%3D%3D",
+    currentDateTime:"32",
+    distance:"12km"
   },
   {
     title: "Service 2",
@@ -63,35 +66,52 @@ export function ServicesSection() {
         <Button size={"lg"} variant="outline">Events</Button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div className="space-y-6">
+      <div className="space-y-6">
   {services?.map((service, index) => (
-    <Card key={index} className="flex animate-fade-in h-48">
-      <div className=" w-1/2 bg-blue-300 flex items-center justify-center overflow-hidden relative">
+    <Card
+      key={index}
+      className="grid grid-cols-[30%_70%] gap-2 items-center animate-fade-in h-48 overflow-hidden py-0"
+    >
+      <div className="h-full w-full bg-blue-300 overflow-hidden">
         <img
-          src={service.image}
+          src={
+            service.image ||
+            "https://plus.unsplash.com/premium_photo-1752521131899-ffc4b14543ba?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1fHx8ZW58MHx8fHx8"
+          }
           alt={service.title}
-          className="w-full bg-red-400 h-full object-cover absolute top-0 left-0"
-      
+          className="w-full h-full object-cover object-left"
         />
-        {/* Debug overlay to check container size */}
-        {/* <div className="absolute inset-0 bg-black/10 pointer-events-none flex items-center justify-center text-white text-xs">
-          {`${Math.round(200 * index)}x${Math.round(48 * index)}`}
-        </div> */}
       </div>
-      <div className="w-1/2 p-4 flex-1 flex flex-col justify-between">
-        <CardHeader>
-          <CardTitle>{service.title}</CardTitle>
-        </CardHeader>
-        <CardContent className="flex-1">
-          <CardDescription>{service.description}</CardDescription>
-        </CardContent>
-      </div>
+      <div className="grid grid-cols-1 p-2">
+      <CardHeader>
+                <CardTitle>{service.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="grid gap-2">
+                <p className="text-sm text-gray-600">{service.description}</p>
+                <p className="text-sm text-gray-500">
+                  Distance: {service.distance} km
+                </p>
+         
+                <p className="text-xs text-gray-400">
+                  Wheather : {service.currentDateTime} 
+                </p>
+              </CardContent>
+            </div>
     </Card>
   ))}
 </div>
-         <div className="h-96 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden flex items-center justify-center text-muted-foreground">
 
-<Image src={"https://api.ambalaymaps.com/v1/staticmap?center=9.03,38.74&zoom=12&size=600x400&markers=color:red|9.03,38.74&key=sam_sam_FSUP9N1D50qTgg1mMUODH61sRHKhE8jg"}alt="Map of Addis Ababa with marker"  width={600} height={400} className="object-cover" />
+<div className="h-200 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden flex items-center justify-center text-muted-foreground">
+  <MapView/>
+  {/* <img
+  // src={mapUrl}
+    src="https://api.ambalaymaps.com/v1/staticmap?center=9.03,38.74&zoom=12&size=600x400&key=sam_sam_FSUP9N1D50qTgg1mMUODH61sRHKhE8jg"
+    alt="Map of Addis Ababa with marker"
+    width={600}
+    height={400}
+    className="object-cover"
+  /> */}
+
         </div>
       </div>
     </section>
