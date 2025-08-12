@@ -89,7 +89,7 @@ export function ServicesSection() {
     </Card>
   ))}
 </div>
-        <div className="h-96 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden flex items-center justify-center text-muted-foreground">
+         <div className="h-96 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden flex items-center justify-center text-muted-foreground">
 
 <Image src={"https://api.ambalaymaps.com/v1/staticmap?center=9.03,38.74&zoom=12&size=600x400&markers=color:red|9.03,38.74&key=sam_sam_FSUP9N1D50qTgg1mMUODH61sRHKhE8jg"}alt="Map of Addis Ababa with marker"  width={600} height={400} className="object-cover" />
         </div>
