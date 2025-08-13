@@ -13,6 +13,7 @@ import { MapPin, Search } from "lucide-react";
 import StaggeredLetter from "./Hero/StaggeredLetter";
 import Expandable from "./Hero/Ads/carousel";
 import SearchBar from "./Hero/SearchBar";
+import { useRouter } from "next/navigation";
 // Dummy location data (simulate map services API)
 const locations = [
     { value: "new-york", label: "New York" },
@@ -32,11 +33,16 @@ const categories = [
 export function HeroSection() {
     const [selectedLocation, setSelectedLocation] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
-
+ const router = useRouter()
     // Filter locations based on search term
     const filteredLocations = locations.filter((loc) =>
         loc.label.toLowerCase().includes(searchTerm.toLowerCase())
     );
+    const handleCategoriesClick = () => {
+        // console.log(`Clicked on category: ${category}`);
+        // Navigate to the category page or perform any action
+        router.push(`/category`);
+    }
     return (
         <section className="py-8 bg-background">
             <div className="container mx-auto px-4">
@@ -63,6 +69,7 @@ export function HeroSection() {
             <div className="flex gap-6 overflow-x-hidden h-full">
               {categories.map((category, index) => (
                 <Card
+                onClick={() => handleCategoriesClick()  }
                   key={index}
                   className="relative overflow-hidden flex-1 h-full cursor-pointer hover:shadow-lg transition-shadow"
                   style={{ backgroundImage: `url(${category.image})`, backgroundSize: "cover", backgroundPosition: "center" }}

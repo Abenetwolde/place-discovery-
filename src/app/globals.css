@@ -127,3 +127,20 @@
   height: 100%;
   width: 100%; 
 } 
+
+@layer utilities {
+  @keyframes pulse-color {
+    0%, 100% {
+      color: var(--accent); /* Use your default text color variable */
+      transform: scale(1);
+    }
+    50% {
+      color: red;
+      transform: scale(1.2);
+    }
+  }
+
+  .animate-pulse-color {
+    animation: pulse-color 3s ease-in-out infinite;
+  }
+}

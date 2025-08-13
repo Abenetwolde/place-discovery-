@@ -24,19 +24,19 @@ const SearchBar: React.FC<SearchBarProps> = ({ locations, onLocationSelect }) =>
   );
 
   return (
-    <div className="mb-8 mt-10 mx-auto flex flex-row justify-center items-center gap-2 sm:gap-x-2 w-full sm:w-3/4 bg-gray-900 rounded-full p-1">
+    <div className="mb-8 mt-10 mx-auto flex flex-row justify-center items-center gap-1 sm:gap-x-2 w-full sm:w-3/4 bg-green-900 rounded-full shadow-lg  border border-gray-300">
       <div className="w-full sm:w-1/3">
         <Popover>
-          <PopoverTrigger asChild>
-            <div className="relative">
-              <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-pink-400 pointer-events-none" />
-              <Input
-  placeholder="Search Location"
-  value={selectedLocation}
-  className="w-full h-12 pl-10 pr-4 text-sm bg-white rounded-l-full border-[1px] !border-gray-300 focus:border-gray-400 focus:ring-0 !border-gray-300"
-/>
-            </div>
-          </PopoverTrigger>
+  <PopoverTrigger asChild>
+  <div className="relative focus-visible:ring-0 focus-visible:ring-offset-0">
+    <MapPin className="animate-pulse-color absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-pink-400 pointer-events-none" />
+    <Input
+      placeholder="Search Location"
+      value={selectedLocation}
+      className="w-full h-12 pl-10 pr-4 text-sm bg-white rounded-l-full border-[1px] !border-gray-300 focus:border-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0"
+    />
+  </div>
+</PopoverTrigger>
           <PopoverContent className="w-[250px] p-0 bg-white rounded-lg shadow-lg">
             <div className="p-2">
               <div className="relative mb-2">

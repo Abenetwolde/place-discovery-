@@ -11,7 +11,7 @@ import {
 import Link from "next/link";
 import { Globe, ChevronDown, Home, Book, LogIn } from "lucide-react";
 import { useState } from "react";
-
+import { useRouter } from 'next/navigation'
 export function Header() {
   const [selectedItem, setSelectedItem] = useState("logo");
   const languages = [
@@ -20,7 +20,13 @@ export function Header() {
     { code: "fr", name: "French" },
     { code: "de", name: "German" },
   ];
+  const router = useRouter()
 
+  const handleClick = () => {
+    console.log("cleck the my booking page")
+    setSelectedItem('myBooking')
+    router.push('/my-booking') // navigate to the page
+  }
   return (
     <header
       className="bg-background border-t sm:border-b sticky sm:top-0 bottom-0 z-10 transition-all duration-300"
@@ -38,8 +44,8 @@ export function Header() {
               Home
             </Button>
             <Button
-              variant={selectedItem === "myBooking" ? "default" : "ghost"}
-              onClick={() => setSelectedItem("myBooking")}
+              variant={selectedItem === 'myBooking' ? 'default' : 'ghost'}
+              onClick={handleClick}
               className="flex-1 flex flex-col items-center text-xs"
             >
               <Book className="h-5 w-5 mb-1" />
@@ -73,7 +79,14 @@ export function Header() {
                   ))}
                 </SelectContent>
               </Select>
-              <Button variant="ghost">My Booking</Button>
+               <Button
+              variant={selectedItem === 'myBooking' ? 'default' : 'ghost'}
+              onClick={handleClick}
+              className="flex-1 flex flex-col items-center text-xs"
+            >
+              
+              My Booking
+            </Button>
               <Button>Sign In</Button>
             </div>
           </div>

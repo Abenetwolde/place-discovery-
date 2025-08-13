@@ -12,39 +12,40 @@ export function MapView() {
         if (mapContainer.current) {
           map.current = new maplibregl.Map({
             container: mapContainer.current,
-            style: {
-              version: 8,
-              name: "Bright Minimal with Layers",
-              sources: {
-                openmaptiles: {
-                  type: "vector",
-                  tiles: ["https://map.ambalaymaps.com/ethiopia/{z}/{x}/{y}.mvt"],
-                  minzoom: 0,
-                  maxzoom: 5,
-                },
-              },
-              layers: [
-                {
-                  id: "background",
-                  type: "background",
-                  paint: { "background-color": "hsl(30, 36%, 96%)" },
-                },
-                {
-                  id: "land",
-                  type: "fill",
-                  source: "openmaptiles",
-                  "source-layer": "landuse",
-                  paint: { "fill-color": "#e0e0e0", "fill-opacity": 0.8 },
-                },
-                {
-                  id: "water",
-                  type: "fill",
-                  source: "openmaptiles",
-                  "source-layer": "water",
-                  paint: { "fill-color": "#a0c8f0", "fill-opacity": 1 },
-                },
-              ],
-            },
+            style:"https://demotiles.maplibre.org/style.json",
+            // style: {
+            //   version: 8,
+            //   name: "Bright Minimal with Layers",
+            //   sources: {
+            //     openmaptiles: {
+            //       type: "vector",
+            //       tiles: ["https://map.ambalaymaps.com/ethiopia/{z}/{x}/{y}.mvt"],
+            //       minzoom: 0,
+            //       maxzoom: 5,
+            //     },
+            //   },
+            //   layers: [
+            //     {
+            //       id: "background",
+            //       type: "background",
+            //       paint: { "background-color": "hsl(30, 36%, 96%)" },
+            //     },
+            //     {
+            //       id: "land",
+            //       type: "fill",
+            //       source: "openmaptiles",
+            //       "source-layer": "landuse",
+            //       paint: { "fill-color": "#e0e0e0", "fill-opacity": 0.8 },
+            //     },
+            //     {
+            //       id: "water",
+            //       type: "fill",
+            //       source: "openmaptiles",
+            //       "source-layer": "water",
+            //       paint: { "fill-color": "#a0c8f0", "fill-opacity": 1 },
+            //     },
+            //   ],
+            // },
             center: [40.5, 9.2], // Ethiopia center as default
             zoom: 6,
             attributionControl: {
