@@ -10,6 +10,9 @@ import { ChevronRight } from "lucide-react";
 import { AdCarousel } from "@/components/AdCarousel";
 import { useState } from "react";
 import { MapPin, Search } from "lucide-react";
+import StaggeredLetter from "./Hero/StaggeredLetter";
+import Expandable from "./Hero/Ads/carousel";
+import SearchBar from "./Hero/SearchBar";
 // Dummy location data (simulate map services API)
 const locations = [
     { value: "new-york", label: "New York" },
@@ -39,63 +42,17 @@ export function HeroSection() {
             <div className="container mx-auto px-4">
                 {/* First main component: Hero text only */}
                 <div className="mb-4">
-                    <h1 className="text-3xl md:text-4xl text-center mb-5 font-bold text-foreground">
+                  <StaggeredLetter/>
+                    {/* <h1 className="text-3xl md:text-4xl text-center mb-5 font-bold text-foreground">
                         Discover Amazing Places
-                    </h1>
+                    </h1> */}
                 </div>
 
                 {/* Second main component: Row with two text fields */}
-       <div className="mb-8 mx-auto flex flex-row justify-center items-center gap-2 sm:gap-x-2 w-full sm:w-3/4">
-      <div className="w-full sm:w-1/3">
-        <Popover>
-          <PopoverTrigger asChild>
-            <div className="relative">
-              <MapPin className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
-              <Input
-                placeholder="Select location..."
-                value={selectedLocation}
-                className="w-full h-10 py-1 pl-8 text-sm"
-                readOnly
-                size={4}
-              />
-            </div>
-          </PopoverTrigger>
-          <PopoverContent className="w-[250px] p-0">
-            <div className="p-2">
-              <div className="relative mb-2">
-                <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder="Search locations..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-8 pr-2 py-1 text-sm"
-                />
-              </div>
-              <div className="max-h-40 overflow-y-auto">
-                {filteredLocations.map((loc) => (
-                  <div
-                    key={loc.value}
-                    className="px-2 py-1 hover:bg-accent cursor-pointer"
-                    onClick={() => {
-                      setSelectedLocation(loc.label);
-                      setSearchTerm("");
-                    }}
-                  >
-                    {loc.label}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </PopoverContent>
-        </Popover>
-      </div>
-      <div className="w-full sm:w-2/3">
-        <Input
-          placeholder="Search for place name..."
-          className="w-full h-10 py-3 text-lg"
-        />
-      </div>
-    </div>
+                <SearchBar locations={[]} onLocationSelect={function (location: string): void {
+            throw new Error("Function not implemented.");
+          } }/>
+ 
 
                 {/* Third main component: Row with left (3 cards in row) and right (carousel ad) */}
           {/* Third main component: Row with left (3 cards in row) and right (carousel ad) */}
@@ -124,7 +81,8 @@ export function HeroSection() {
           {/* Right section: 40% width, single card with carousel ad */}
           <div className="w-full lg:w-2/5 h-full">
             <Card className="py-0 overflow-hidden h-full">
-              <AdCarousel />
+              {/* <AdCarousel /> */}
+              <Expandable/>
             </Card>
           </div>
         </div>

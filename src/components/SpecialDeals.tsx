@@ -29,11 +29,11 @@ export function SpecialDeals() {
   ]
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 mt-20">
       <h2 className="text-xl font-semibold">Special Deals & Offers</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         {deals.map((deal, index) => (
-          <Card key={index} className="flex flex-col overflow-hidden py-0">
+          <Card key={index} className="flex flex-col overflow-hidden py-0 shadow-2xl">
             <div className="relative w-full h-52">
               <img
                 src={deal.image}

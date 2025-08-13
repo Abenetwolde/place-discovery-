@@ -16,7 +16,7 @@ export default function Home() {
         <ServicesSection />
         <SpecialDeals/>
         <WeatherCurrencyRow/>
-        <TravelTips/>
+        {/* <TravelTips/> */}
         </main>
       <ChatBubble />
     </div>

@@ -6,10 +6,11 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
 import { ArrowUpDown, DollarSign, TrendingUp, CircleArrowUp, CloudSunRain } from "lucide-react"
+import TravelTips from "./travel-tip"
 
 function WeatherCard() {
   return (
-    <div className="relative flex  flex-col rounded-3xl bg-opacity-10 bg-gradient-to-r from-gray-200 to-gray-300 bg-clip-padding p-4 backdrop-blur-sm backdrop-filter dark:from-gray-700 dark:to-gray-900">
+    <div className="relative flex  shadow-1xl  flex-col rounded-2xl bg-opacity-10 bg-gradient-to-r from-gray-200 to-gray-300 bg-clip-padding p-4 backdrop-blur-sm backdrop-filter dark:from-gray-700 dark:to-gray-900">
       <div className="flex flex-1 flex-col gap-2 dark:text-white">
         <p className="city opacity-70">Addis Ababa</p>
         <div className="flex items-center">
@@ -33,169 +34,174 @@ function WeatherCard() {
   );
 }
 
+interface Currency {
+  code: string;
+  name: string;
+  symbol: string;
+}
 
+interface ExchangeRates {
+  [key: string]: number;
+}
 
- function CurrencyConverter() {
-  const [amount, setAmount] = useState("100")
-  const [fromCurrency, setFromCurrency] = useState("USD")
-  const [toCurrency, setToCurrency] = useState("ETB")
-  const [rates, setRates] = useState<any>({})
-  const [result, setResult] = useState<number | null>(null)
+function CurrencyConverter() {
+  const [amount, setAmount] = useState<string>("100");
+  const [fromCurrency, setFromCurrency] = useState<string>("USD");
+  const [toCurrency, setToCurrency] = useState<string>("ETB");
+  const [rates, setRates] = useState<ExchangeRates>({});
+  const [result, setResult] = useState<number | null>(null);
 
-  const mockRates: any = {
+  // Mock exchange rates (in production, use a real API)
+  const mockRates: ExchangeRates = {
     USD: 1,
-    ETB: 55.2,
+    ETB: 55.2, // Ethiopian Birr
     EUR: 0.85,
     GBP: 0.73,
     CAD: 1.25,
     AUD: 1.35,
-  }
+  };
 
-  const currencies = [
+  const currencies: Currency[] = [
     { code: "USD", name: "US Dollar", symbol: "$" },
     { code: "ETB", name: "Ethiopian Birr", symbol: "Br" },
     { code: "EUR", name: "Euro", symbol: "€" },
     { code: "GBP", name: "British Pound", symbol: "£" },
     { code: "CAD", name: "Canadian Dollar", symbol: "C$" },
     { code: "AUD", name: "Australian Dollar", symbol: "A$" },
-  ]
+  ];
 
   useEffect(() => {
-    setRates(mockRates)
-  }, [])
+    setRates(mockRates);
+  }, []);
 
   useEffect(() => {
     if (amount && rates[fromCurrency] && rates[toCurrency]) {
-      const fromRate = rates[fromCurrency]
-      const toRate = rates[toCurrency]
-      const converted = (Number.parseFloat(amount) / fromRate) * toRate
-      setResult(converted)
+      const fromRate: number = rates[fromCurrency];
+      const toRate: number = rates[toCurrency];
+      const converted: number = (Number.parseFloat(amount) / fromRate) * toRate;
+      setResult(converted);
     }
-  }, [amount, fromCurrency, toCurrency, rates])
+  }, [amount, fromCurrency, toCurrency, rates]);
 
-  const swapCurrencies = () => {
-    setFromCurrency(toCurrency)
-    setToCurrency(fromCurrency)
-  }
+  const swapCurrencies = (): void => {
+    setFromCurrency(toCurrency);
+    setToCurrency(fromCurrency);
+  };
 
-  const getCommonAmounts = () => {
-    const common = [10, 50, 100, 500, 1000]
-    return common.map((amt) => {
-      const converted = (amt / rates[fromCurrency]) * rates[toCurrency]
-      return { original: amt, converted }
-    })
-  }
+  const getCommonAmounts = (): { original: number; converted: number }[] => {
+    const common: number[] = [10, 50, 100, 500, 1000];
+    return common.map((amt: number) => {
+      const converted: number = (amt / rates[fromCurrency]) * rates[toCurrency];
+      return { original: amt, converted };
+    });
+  };
 
   return (
-    <Card className="p-4 shadow-lg border border-gray-200 rounded-2xl bg-gradient-to-br from-white to-gray-50">
-      <CardHeader className="pb-2">
-        <CardTitle className="text-lg font-semibold flex items-center gap-2 text-gray-800">
-          <span className="bg-green-100 p-2 rounded-full">
-            <DollarSign className="h-5 w-5 text-green-600" />
-          </span>
-          Currency Converter
-        </CardTitle>
-      </CardHeader>
+    <div className="max-w-md mx-auto bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-2xl p-6 transition-all duration-300 hover:shadow-3xl">
+      <div className="flex items-center space-x-2 mb-6">
+        <DollarSign className="h-6 w-6 text-indigo-600" />
+        <h2 className="text-xl font-bold text-gray-800">Currency Converter</h2>
+      </div>
 
-      <CardContent className="space-y-5">
-        {/* Amount & From Currency */}
-        <div className="flex items-center gap-3">
-          <Input
+      <div className="space-y-6">
+        {/* Input and From Currency */}
+        <div className="flex items-center space-x-3">
+          <input
             type="number"
             value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            placeholder="Amount"
-            className="flex-1 rounded-xl border-gray-300 focus:ring-2 focus:ring-green-400"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAmount(e.target.value)}
+            placeholder="Enter amount"
+            className="flex-1 p-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white text-gray-800 transition-all duration-200"
           />
-          <Select value={fromCurrency} onValueChange={setFromCurrency}>
-            <SelectTrigger className="w-24 rounded-xl border-gray-300 focus:ring-2 focus:ring-green-400">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {currencies.map((currency) => (
-                <SelectItem key={currency.code} value={currency.code}>
-                  {currency.code}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <select
+            value={fromCurrency}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFromCurrency(e.target.value)}
+            className="p-3 rounded-lg border border-gray-200 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-24 transition-all duration-200"
+          >
+            {currencies.map((currency: Currency) => (
+              <option key={currency.code} value={currency.code}>
+                {currency.code}
+              </option>
+            ))}
+          </select>
         </div>
 
         {/* Swap Button */}
         <div className="flex justify-center">
-          <Button
-            variant="ghost"
-            size="sm"
+          <button
             onClick={swapCurrencies}
-            className="hover:bg-green-100 rounded-full p-2"
+            className="p-2 rounded-full bg-indigo-100 text-indigo-600 hover:bg-indigo-200 transition-all duration-200 transform hover:scale-110"
           >
-            <ArrowUpDown className="h-5 w-5 text-green-600" />
-          </Button>
+            <ArrowUpDown className="h-5 w-5" />
+          </button>
         </div>
 
-        {/* Result & To Currency */}
-        <div className="flex items-center gap-3">
-          <Input
+        {/* Output and To Currency */}
+        <div className="flex items-center space-x-3">
+          <input
             type="text"
             value={result ? result.toFixed(2) : ""}
             readOnly
             placeholder="Converted amount"
-            className="flex-1 rounded-xl bg-gray-100 border-gray-200 font-medium text-gray-800"
+            className="flex-1 p-3 rounded-lg border border-gray-200 bg-gray-100 text-gray-800 focus:outline-none"
           />
-          <Select value={toCurrency} onValueChange={setToCurrency}>
-            <SelectTrigger className="w-24 rounded-xl border-gray-300 focus:ring-2 focus:ring-green-400">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {currencies.map((currency) => (
-                <SelectItem key={currency.code} value={currency.code}>
-                  {currency.code}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <select
+            value={toCurrency}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setToCurrency(e.target.value)}
+            className="p-3 rounded-lg border border-gray-200 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-24 transition-all duration-200"
+          >
+            {currencies.map((currency: Currency) => (
+              <option key={currency.code} value={currency.code}>
+                {currency.code}
+              </option>
+            ))}
+          </select>
         </div>
 
         {/* Quick Reference */}
-        <div className="border-t pt-3 mt-3">
-          <div className="text-xs text-gray-500 mb-2 flex items-center gap-1">
-            <TrendingUp className="h-3 w-3 text-green-500" />
-            Quick Reference
+        <div className="border-t border-gray-200 pt-4">
+          <div className="flex items-center text-sm text-gray-600 mb-3">
+            <TrendingUp className="h-4 w-4 mr-2 text-indigo-600" />
+            <span>Quick Reference</span>
           </div>
-          <div className="space-y-1">
+          <div className="grid grid-cols-3 gap-2 text-sm">
             {getCommonAmounts()
               .slice(0, 3)
-              .map((item, index) => (
+              .map((item: { original: number; converted: number }, index: number) => (
                 <div
                   key={index}
-                  className="flex justify-between text-xs bg-gray-50 px-3 py-2 rounded-lg shadow-sm"
+                  className="flex justify-between p-2 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200"
                 >
-                  <span className="text-gray-600">
-                    {currencies.find((c) => c.code === fromCurrency)?.symbol}
+                  <span>
+                    {currencies.find((c: Currency) => c.code === fromCurrency)?.symbol}
                     {item.original}
                   </span>
-                  <span className="font-semibold text-gray-800">
-                    {currencies.find((c) => c.code === toCurrency)?.symbol}
+                  <span className="text-indigo-600 font-medium">
+                    {currencies.find((c: Currency) => c.code === toCurrency)?.symbol}
                     {item.converted.toFixed(2)}
                   </span>
                 </div>
               ))}
           </div>
         </div>
-      </CardContent>
-    </Card>
-  )
-}
-
+      </div>
+    </div>
+  );
+    }
 
 export default function WeatherCurrencyRow() {
   return (
-    <div className="flex mt-20 flex-row gap-4">
-      <div className="w-[30%]">
-        <WeatherCard />
-      </div>
-      <div className="w-[70%]">
-        <CurrencyConverter />
+    <div className="container mx-auto px-4 py-10">
+      <div className="flex flex-col lg:flex-row gap-4 mt-20">
+        <div className="w-full lg:w-1/3">
+          <WeatherCard />
+        </div>
+        <div className="w-full lg:w-1/3">
+          <CurrencyConverter />
+        </div>
+        <div className="w-full lg:w-1/3">
+       <TravelTips/>
+        </div>
       </div>
     </div>
   );

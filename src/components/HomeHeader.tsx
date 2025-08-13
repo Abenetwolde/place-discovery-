@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Link from "next/link";
 import { Globe, ChevronDown, Home, Book, LogIn } from "lucide-react";
 import { useState } from "react";
 
