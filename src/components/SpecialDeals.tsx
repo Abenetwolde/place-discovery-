@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useRef, useEffect } from "react"
@@ -17,33 +16,35 @@ const deals: Deal[] = [
   {
     title: "Deal 1",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: "https://images.unsplash.com/photo-1455587734955-081b22074882?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aG90ZWx8ZW58MHx8MHx8fDI%3D",
   },
   {
     title: "Deal 2",
     description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG90ZWx8ZW58MHx8MHx8fDI%3D",
   },
   {
     title: "Deal 3",
     description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    image: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: "https://images.unsplash.com/photo-1445991842772-097fea258e7b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8aG90ZWx8ZW58MHx8MHx8fDI%3D",
   },
   {
     title: "Deal 4",
     description: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: "https://images.unsplash.com/photo-1549294413-26f195200c16?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 ]
 
-export default function SpecialDeals() {
+export default function SpecialDeals({titel}:any) {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const autoScrollIntervalRef = useRef<NodeJS.Timeout | null>(null)
 
   const scroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
-      const cardWidth = scrollContainerRef.current.querySelector(".deal-card")?.clientWidth || 0
-      const scrollAmount = direction === "right" ? cardWidth + 16 : -(cardWidth + 16) // 16 for gap
+      const card = scrollContainerRef.current.querySelector(".deal-card")
+      if (!card) return
+      const cardWidth = card.clientWidth + 16 // 16 for gap
+      const scrollAmount = direction === "right" ? cardWidth : -cardWidth
       scrollContainerRef.current.scrollBy({
         left: scrollAmount,
         behavior: "smooth",
@@ -55,18 +56,23 @@ export default function SpecialDeals() {
     if (scrollContainerRef.current && !autoScrollIntervalRef.current) {
       autoScrollIntervalRef.current = setInterval(() => {
         if (scrollContainerRef.current) {
-          const cardWidth = scrollContainerRef.current.querySelector(".deal-card")?.clientWidth || 0
+          const card = scrollContainerRef.current.querySelector(".deal-card")
+          if (!card) return
+          const cardWidth = card.clientWidth + 16 // 16 for gap
           const maxScroll = scrollContainerRef.current.scrollWidth - scrollContainerRef.current.clientWidth
-          if (scrollContainerRef.current.scrollLeft >= maxScroll) {
+          const currentScroll = scrollContainerRef.current.scrollLeft
+          
+          // Check if we've reached or exceeded the end
+          if (currentScroll >= maxScroll - 1) { // Small buffer for precision
             scrollContainerRef.current.scrollTo({ left: 0, behavior: "smooth" })
           } else {
             scrollContainerRef.current.scrollBy({
-              left: cardWidth + 16,
+              left: cardWidth,
               behavior: "smooth",
             })
           }
         }
-      }, 2000) // 3-second delay between scrolls
+      }, 3000) // Adjusted to 3-second delay for smoother experience
     }
   }
 
@@ -82,12 +88,23 @@ export default function SpecialDeals() {
     return () => stopAutoScroll() // Cleanup on unmount
   }, [])
 
+  // Detect screen size changes to restart auto-scroll
+  useEffect(() => {
+    const handleResize = () => {
+      stopAutoScroll()
+      startAutoScroll()
+    }
+
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
   return (
-    <div className="space-y-4 mt-20 mx-4 sm:mx-8 md:mx-12 lg:mx-16">
+    <div className="space-y-4 mt-20 mx-4 sm:mx-8 md:mx-12 lg:mx-16 xl:mx-20">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold text-gray-800">Special Deals & Offers</h2>
+        <h2 className="text-xl font-semibold text-gray-800">{titel?titel:"Special Deals & Offers"}</h2>
         <div className="flex space-x-2">
-          {/* <Button
+          <Button
             variant="outline"
             size="icon"
             onClick={() => {
@@ -112,7 +129,7 @@ export default function SpecialDeals() {
             className="bg-white border-gray-300 text-gray-600 hover:bg-gray-100"
           >
             <ChevronRight className="h-5 w-5" />
-          </Button> */}
+          </Button>
           <Button
             variant="outline"
             size="sm"
@@ -136,7 +153,7 @@ export default function SpecialDeals() {
         {deals.map((deal, index) => (
           <Card
             key={index}
-            className="deal-card flex-none w-64 sm:w-72 md:w-80 snap-center bg-white shadow-md rounded-xl overflow-hidden transition-transform duration-300 hover:shadow-lg py-0 shadow-xl"
+            className="deal-card flex-none w-64 sm:w-72 md:w-80 xl:w-96 snap-center bg-white shadow-md rounded-xl overflow-hidden transition-transform duration-300 hover:shadow-lg py-0 shadow-xl"
           >
             <div className="relative w-full h-40">
               <img
@@ -155,11 +172,10 @@ export default function SpecialDeals() {
                 <Button
                   variant="default"
                   size="sm"
-                  className=" text-white hover:bg-blue-700"
+                  className="text-white hover:bg-blue-700"
                 >
                   Book Now
                 </Button>
-             
               </div>
             </CardContent>
           </Card>

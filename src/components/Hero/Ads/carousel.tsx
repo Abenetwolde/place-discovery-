@@ -54,18 +54,18 @@ const List: React.FC<ImageProps> = ({ item, className, index, activeItem, ...pro
 const items = [
   {
     image:
-      "https://images.unsplash.com/photo-1541753236788-b0ac1fc5009d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3",
-    title: "Mountains",
+      "https://images.unsplash.com/photo-1516533075015-a3838414c3ca?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZXRoaW9waWF8ZW58MHx8MHx8fDI%3D",
+    title: "Ad1",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1718027808460-7069cf0ca9ae?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3",
-    title: "Great Wall",
+      "https://images.unsplash.com/photo-1573404353091-bd68e3010d73?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Ad2",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1584968173934-bc0b588eb806?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3",
-    title: "Patterns",
+      "https://images.unsplash.com/photo-1573401545579-498aa95975bd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Ad3",
   },
 ];
 

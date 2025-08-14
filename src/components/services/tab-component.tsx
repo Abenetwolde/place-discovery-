@@ -15,7 +15,7 @@ export default function Tab({ text, selected, setSelected }: TabProps) {
       onClick={() => setSelected(text)}
       className={cn(
         "relative rounded-md px-4 py-2 text-sm transition-all",
-        selected ? "text-white bg-black" : "text-gray-700 bg-gray-200 hover:bg-gray-300"
+        selected ? "text-white bg-black" : "text-gray-700 bg-gray-100 hover:bg-gray-300"
       )}
     >
       <p className="relative z-50">{text}</p>

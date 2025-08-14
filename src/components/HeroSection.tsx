@@ -25,9 +25,9 @@ const locations = [
 
 // Dummy category data for left cards
 const categories = [
-    { title: "Category 1", image: "https://images.unsplash.com/photo-1754772512355-299e9c2b1b76?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw2fHx8ZW58MHx8fHx8" },
-    { title: "Category 2", image: "https://images.unsplash.com/photo-1754799399805-da0178249638?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxNXx8fGVufDB8fHx8fA%3D%3D" },
-    { title: "Category 3", image: "https://plus.unsplash.com/premium_photo-1754728140366-a4a8c8cfb266?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzN3x8fGVufDB8fHx8fA%3D%3D" },
+    { title: "Hiritage Sites", image: "https://images.unsplash.com/photo-1653537877655-26bc13c83976?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG1vbnVtbmV0cyUyMGV0aGlvcGlhfGVufDB8fDB8fHwy" },
+    { title: "Natural Wonder", image: "https://images.unsplash.com/photo-1632309802733-ddf63a8f4955?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+    { title: "Cultural Site", image: "https://images.unsplash.com/photo-1696299872422-0f72e707a037?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bW9udW1uZXRzJTIwZXRoaW9waWF8ZW58MHx8MHx8fDI%3D" },
 ];
 
 export function HeroSection() {

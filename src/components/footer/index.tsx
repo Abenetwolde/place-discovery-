@@ -96,16 +96,16 @@ export default function Footer() {
           {/* Contact Info */}
           <div>
             <h3 className="text-lg font-semibold text-white mb-4">Contact</h3>
-            <p className="text-sm">Email: support@lalibelatravel.com</p>
+            <p className="text-sm">Email: support@AmbaLayMaps.com</p>
             <p className="text-sm">Phone: +251-91-123-4567</p>
-            <p className="text-sm">Lalibela, Ethiopia</p>
+            <p className="text-sm">AmbaLay Maps, Ethiopia</p>
           </div>
         </div>
 
         {/* Copyright Notice */}
         <div className="mt-8 pt-8 border-t border-gray-700 text-center">
           <p className="text-sm">
-            &copy; {currentYear} Lalibela Travel. All rights reserved.
+            &copy; {currentYear} AmbaLay Maps . All rights reserved.
           </p>
         </div>
       </div>

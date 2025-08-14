@@ -11,11 +11,11 @@ interface TabsSectionProps {
 }
 
 export default function TabsSection({ selectedTab, setSelectedTab, tabs }: TabsSectionProps) {
-  return (
-    <div className="flex flex-row space-x-2 bg-gray-200 rounded-md p-2">
-      {tabs.map((tab) => (
-        <Tab key={tab} text={tab} selected={selectedTab === tab} setSelected={setSelectedTab} />
-      ))}
-    </div>
-  );
-}
+    return (
+      <div className="flex flex-row  item-center justfiy-between  space-x-2 bg-gray-100 rounded-md p-2">
+        {tabs.map((tab) => (
+          <Tab key={tab} text={tab} selected={selectedTab === tab} setSelected={setSelectedTab} />
+        ))}
+      </div>
+    );
+  }

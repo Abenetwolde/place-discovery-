@@ -144,3 +144,12 @@
     animation: pulse-color 3s ease-in-out infinite;
   }
 }
+@keyframes pulse-ring {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(30, 30, 31, 0.6); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(59,130,246, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59,130,246, 0); }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 1.5s infinite;
+}

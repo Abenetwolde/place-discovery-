@@ -88,11 +88,11 @@ export default function HomePage() {
       <main className="flex-1">
         {/* Category Hero Image with title */}
         <div 
-          className="relative h-64 bg-cover bg-center" 
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1519681393784-d120267933ba)' }}
+          className="relative h-100 bg-cover bg-center" 
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1573401545579-498aa95975bd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)' }}
         >
           <div className="absolute inset-0 flex items-center justify-center bg-black/50">
-            <h1 className="text-4xl font-extrabold text-white">Mountains</h1>
+            <h1 className="text-4xl font-extrabold text-white">Category</h1>
           </div>
         </div>
 
@@ -102,7 +102,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-8">
             
             {/* Sidebar with Filtering Options */}
-            <aside className="space-y-6">
+            <aside className="space-y-6 bg-white p-10 h-max shadow-l">
               <h2 className="text-lg font-bold">Filters</h2>
 
               {/* Price Range Filter */}
@@ -168,10 +168,7 @@ export default function HomePage() {
             <div className="flex-1">
               {/* Secondary Filter Bar with Map Toggle */}
               <div className="mb-8 flex flex-col items-center justify-between space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-                <div className="flex space-x-2">
-                  <Button variant="ghost">Sort by</Button>
-                  <Button variant="ghost">Price Range</Button>
-                </div>
+          <div></div>
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>

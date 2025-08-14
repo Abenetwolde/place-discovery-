@@ -12,7 +12,8 @@ export function MapView() {
         if (mapContainer.current) {
           map.current = new maplibregl.Map({
             container: mapContainer.current,
-            style:"https://demotiles.maplibre.org/style.json",
+            style: "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
+
             // style: {
             //   version: 8,
             //   name: "Bright Minimal with Layers",
@@ -69,7 +70,7 @@ export function MapView() {
                 // Fly to current location
                 map.current!.flyTo({
                   center: [longitude, latitude],
-                  zoom: 4,
+                  zoom: 10,
                   duration: 2000,
                 });
               },

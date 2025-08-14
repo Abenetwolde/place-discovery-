@@ -63,7 +63,9 @@ export function Header() {
 
           {/* Top Header for larger screens */}
           <div className="hidden sm:flex items-center justify-between w-full">
-            <div className="text-xl sm:text-2xl font-bold">Logo</div>
+
+    <Link href="/" onClick={() => setSelectedItem("logo")}>
+            <div className="text-xl sm:text-2xl font-bold">Logo</div> </Link>
             <div className="flex items-center space-x-4">
               <Select>
                 <SelectTrigger className="w-[180px] pl-2 pr-2">

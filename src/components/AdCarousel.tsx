@@ -6,7 +6,7 @@ import { CardContent } from "@/components/ui/card";
 
 // Dummy ad images
 const adImages = [
-  "https://images.unsplash.com/photo-1754295083128-7f9c69c0a4d3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw0NHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1696299872422-0f72e707a037?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bW9udW1uZXRzJTIwZXRoaW9waWF8ZW58MHx8MHx8fDI%3D",
   "https://plus.unsplash.com/premium_photo-1754738812928-d7f23344b956?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1N3x8fGVufDB8fHx8fA%3D%3D",
  
 ];
